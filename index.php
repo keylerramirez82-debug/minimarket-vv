@@ -1,0 +1,180 @@
+<?php
+session_start();
+$isLogged = isset($_SESSION['user_id']);
+$userName = htmlspecialchars($_SESSION['user_nombre'] ?? '');
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimarcket V&V</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="cart.js" defer></script>
+</head>
+<body>
+    <header class="banner">
+        <div class="header-content">
+            <a href="#" class="brand">
+                <img src="imagenes/logo.png" alt="Minimarket V&V logo">
+            </a>
+            <nav class="nav-links">
+                <a href="index.php" class="active">Inicio</a>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Productos ▾</button>
+                    <div class="dropdown-menu">
+                        <a href="productos_de_limpieza.html">Limpieza</a>
+                        <a href="snack.html">Snacks</a>
+                        <a href="frutas.html">Frutas</a>
+                        <a href="bebidas.html">Bebidas</a>
+                        <a href="alimentos.html">Alimentos</a>
+                        <a href="bebidas_alcoholicas.html">Bebidas Alcohólicas</a>
+                    </div>
+                </div>
+                <a href="opiniones.html">Opiniones</a>
+                <a href="Delivery.html">Delivery</a>
+                <a href="dashboard.php">📊 Dashboard</a>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn" aria-label="Buscar">
+                    <img src="iconos/lupa.png" alt="Buscar">
+                </button>
+                <button class="icon-btn cart" aria-label="Carrito">
+                    🛒
+                    <span class="cart-count">2</span>
+                </button>
+                <?php if ($isLogged): ?>
+                    <span class="account-label">Hola, <?= $userName ?></span>
+                    <a href="logout.php" class="btn account">Salir</a>
+                <?php else: ?>
+                    <a href="login.html" class="btn account">Mi cuenta</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </header>
+    <main class="hero">
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <p class="eyebrow">Tu colmado de siempre</p>
+                <h1>De todo, <span>siempre</span> cerca</h1>
+                <p class="hero-description">Encuentra los mejores productos con calidad, buen precio y atención como en familia.</p>
+                <div class="hero-actions">
+                    <a href="#" class="btn primary">Ver productos</a>
+                    <a href="#" class="btn secondary">Ofertas del día</a>
+                </div>
+                <div class="hero-features">
+                    <div class="feature">
+                        <img src="iconos/ubicacion.png" alt="Entrega a domicilio">
+                        <div>
+                            <strong>Entrega a domicilio</strong>
+                            <span>Rápido y seguro</span>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <img src="iconos/carrito lleno.png" alt="Los mejores precios">
+                        <div>
+                            <strong>Los mejores precios</strong>
+                            <span>Ahorra más cada día</span>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <img src="iconos/user.png" alt="Atención de confianza">
+                        <div>
+                            <strong>Atención de confianza</strong>
+                            <span>Como en familia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="imagenes/bolsa de compras.jpeg" alt="Bolsa de compras">
+            </div>
+        </div>
+    </main>
+    <section class="bottom-section">
+        <p class="hero-subtitle">Productos</p>
+        <p class="hero-bigtext">Todo lo que necesitas</p>
+        <div class="cards-grid">
+            <a href="frutas.html" class="category-card">
+                <img src="imagenes/canasta.png" alt="Frutas y Vegetales" class="category-image">
+                <h3 class="category-name">Frutas y Vegetales</h3>
+            </a>
+            <a href="alimentos.html" class="category-card">
+                <img src="imagenes/arroz.jpg" alt="Alimentos" class="category-image">
+                <h3 class="category-name">Alimentos</h3>
+            </a>
+            <a href="bebidas.html" class="category-card">
+                <img src="imagenes/bebidas.jpg" alt="Bebidas" class="category-image">
+                <h3 class="category-name">Bebidas</h3>
+            </a>
+            <a href="productos_de_limpieza.html" class="category-card">
+                <img src="imagenes/detergente.png" alt="Limpieza" class="category-image">
+                <h3 class="category-name">Limpieza</h3>
+            </a>
+            <a href="bebidas_alcoholicas.html" class="category-card">
+                <img src="imagenes/bebidas alcoholicas.jpg" alt="Bebidas Alcohólicas" class="category-image">
+                <h3 class="category-name">Bebidas Alcohólicas</h3>
+            </a>
+            <a href="snack.html" class="category-card">
+                <img src="imagenes/snacks.jpg" alt="Snacks" class="category-image">
+                <h3 class="category-name">Snacks</h3>
+            </a>
+        </div>
+    </section>
+<section class="bottom-section">
+        <p class="hero-subtitle">Productos destacados</p>
+        <div class="cards-grid">
+            <div class="card product-card">
+                <img src="imagenes/arroz.jpg" alt="Arroz" class="product-image">
+                <h3 class="product-name">Arroz Campos</h3>
+                <p class="product-quantity">5 lb</p>
+                <p class="product-price">$240.00</p>
+                <button class="add-to-cart">+</button>
+            </div>
+            <div class="card product-card">
+                <img src="imagenes/azucar morena.jpg" alt="Azúcar Morena" class="product-image">
+                <h3 class="product-name">Azúcar Morena</h3>
+                <p class="product-quantity">2 lb</p>
+                <p class="product-price">$85.00</p>
+                <button class="add-to-cart">+</button>
+            </div>
+            <div class="card product-card">
+                <img src="imagenes/cafe santo domingo.jpg" alt="Café Santo Domingo" class="product-image">
+                <h3 class="product-name">Café Santo Domingo</h3>
+                <p class="product-quantity"> 1 lb</p>
+                <p class="product-price">$320.00</p>
+                <button class="add-to-cart">+</button>
+            </div>
+            <div class="card product-card">
+                <img src="imagenes/grisol.jpg" alt="Grisol" class="product-image">
+                <h3 class="product-name">Aceite Grisol</h3>
+                <p class="product-quantity">16 oz</p>
+                <p class="product-price">$125.00</p>
+                <button class="add-to-cart">+</button>
+            </div>
+            <div class="card product-card">
+                <img src="imagenes/habichuelas goya.jpg" alt="Habichuelas Goya" class="product-image">
+                <h3 class="product-name">Habichuelas Goya</h3>
+                <p class="product-quantity">15 oz</p>
+                <p class="product-price">$55.00</p>
+                <button class="add-to-cart">+</button>
+            </div>
+            <div class="card product-card">
+                <img src="imagenes/rica.jpg" alt="Rica" class="product-image">
+                <h3 class="product-name">Rica</h3>
+                <p class="product-quantity">1 L</p>
+                <p class="product-price">$95.00</p>
+                <button class="add-to-cart">+</button>
+            </div>
+        </div>
+    </section>
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-cart-modal" class="close">&times;</span>
+            <h2>Carrito de Compras</h2>
+            <div id="cart-items"></div>
+            <div id="total-price"></div>
+        </div>
+    </div>
+</body>
+</html>

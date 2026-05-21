@@ -1,21 +1,23 @@
 <?php
-// Configuración de los parámetros del servidor local (XAMPP)
-$host = "localhost";
-$user = "root";       // Usuario por defecto de XAMPP
-$pass = "";           // Contraseña por defecto (vacía)
-$db   = "minimarket_vv"; // El nombre de la base de datos que creamos
+// Conexión a la base de datos usando PDO (copia local para la carpeta iconos)
+$host = 'localhost';
+$db   = 'minimarket_vv';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
 
-// Crear la conexión utilizando la extensión mysqli
-$conexion = mysqli_connect($host, $user, $pass, $db);
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
-// Verificar si la conexión fue exitosa
-if (!$conexion) {
-    die("Error de conexión: " . mysqli_connect_error());
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (PDOException $e) {
+    die('Error de conexión a la base de datos: ' . $e->getMessage());
 }
 
-// Configurar el conjunto de caracteres a UTF-8 para evitar problemas con acentos (ñ, á, etc.)
-mysqli_set_charset($conexion, "utf8");
-
-// Si llega aquí, la conexión es exitosa
-// echo "Conexión establecida correctamente"; 
+// Uso: incluir este archivo y usar la variable $pdo
 ?>
