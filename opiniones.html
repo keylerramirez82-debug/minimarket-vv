@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opiniones - Minimarket V&V</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="cart.js" defer></script>
+    <style>
+        /* Estilos refinados para la página de opiniones */
+        .bottom-section.opinion-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 28px;
+            padding: 2.5rem;
+            box-shadow: 0 30px 70px rgba(44, 26, 14, 0.15);
+            border: 1px solid rgba(200, 174, 141, 0.26);
+        }
+        .bottom-section.opinion-card h1 {
+            font-size: 2.4rem;
+            letter-spacing: -0.03em;
+            color: #2b1d14;
+            margin-bottom: 1.5rem;
+        }
+        .auth-form label {
+            display: block;
+            margin-top: 18px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #4b3d31;
+        }
+        .auth-form input,
+        .auth-form select,
+        .auth-form textarea {
+            width: 100%;
+            padding: 14px 16px;
+            margin-top: 10px;
+            border: 1px solid #e5d8c8;
+            border-radius: 18px;
+            background: #fbf6f1;
+            color: #2b1d14;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .auth-form select {
+            appearance: none;
+            background-image: linear-gradient(45deg, transparent 50%, #a2774e 50%), linear-gradient(135deg, #a2774e 50%, transparent 50%);
+            background-position: calc(100% - 22px) calc(50% - 3px), calc(100% - 15px) calc(50% - 3px);
+            background-size: 8px 8px;
+            background-repeat: no-repeat;
+        }
+        .auth-form textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+        .auth-form button {
+            margin-top: 24px;
+            border-radius: 999px;
+            padding: 1.1rem 1.5rem;
+            box-shadow: 0 12px 26px rgba(200, 81, 10, 0.2);
+        }
+        .feedback-modal .modal-content {
+            background: linear-gradient(180deg, #fff9f0 0%, #fff3e3 100%);
+            border: 1px solid rgba(200, 81, 10, 0.2);
+            padding: 2rem 2rem 1.75rem;
+            border-radius: 28px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+        }
+        .feedback-modal .feedback-icon {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            background: #C8510A;
+            color: #fff;
+            font-size: 2.2rem;
+            box-shadow: 0 20px 40px rgba(200, 81, 10, 0.22);
+        }
+        .feedback-modal h2 {
+            margin: 0 0 0.75rem;
+            color: #2b1d14;
+            font-size: 1.8rem;
+        }
+        .feedback-modal p {
+            margin: 0;
+            color: #5d4329;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+    <header class="banner">
+        <div class="header-content">
+            <a href="index.html" class="brand">
+                <img src="imagenes/logo.png" alt="Minimarket V&V logo">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Inicio</a>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Productos ▾</button>
+                    <div class="dropdown-menu">
+                        <a href="productos_de_limpieza.html">Limpieza</a>
+                        <a href="snack.html">Snacks</a>
+                        <a href="frutas.html">Frutas</a>
+                        <a href="bebidas.html">Bebidas</a>
+                        <a href="alimentos.html">Alimentos</a>
+                        <a href="bebidas_alcoholicas.html">Bebidas Alcohólicas</a>
+                    </div>
+                </div>
+                <a href="opiniones.html" class="active">Opiniones</a>
+                <a href="Delivery.html">Delivery</a>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn" aria-label="Buscar">
+                    <img src="iconos/lupa.png" alt="Buscar">
+                </button>
+                <button class="icon-btn cart" aria-label="Carrito">
+                    🛒
+                    <span class="cart-count">0</span>
+                </button>
+                <a href="login.html" class="btn account">Mi cuenta</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="bottom-section" style="max-width:700px; margin:2rem auto;">
+            <h1 style="margin-bottom:1rem;">Déjanos tu opinión</h1>
+            <form class="auth-form" id="opiniones-form">
+                <label for="nombre"></label>
+                <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required>
+
+                
+                <select id="motivo" name="motivo">
+                    <option value="sugerencia">Sugerencia</option>
+                    <option value="queja">Queja</option>
+                    <option value="felicitacion">Felicitación</option>
+                    <option value="sugerencia">Sugerencias</option>
+                    <option value="felicitacion">Opiniones</option>
+                    <option value="otro">Otro</option>
+                </select>
+
+              
+                <textarea id="opinion" name="opinion" rows="8" placeholder="Escribe aquí tu opinión..." required></textarea>
+
+                <button type="submit" class="btn primary" style="width:100%; margin-top:16px;">Enviar opinión</button>
+            </form>
+        </section>
+    </main>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-cart-modal" class="close">&times;</span>
+            <h2>Carrito de Compras</h2>
+            <div id="cart-items"></div>
+            <div id="total-price"></div>
+        </div>
+    </div>
+
+    <div id="feedback-modal" class="modal feedback-modal">
+        <div class="modal-content">
+            <span id="close-feedback-modal" class="close">&times;</span>
+            <div class="feedback-icon">✓</div>
+            <h2>Opinión recibida</h2>
+            <p>muchas gracias lo tomaremos en cuentas</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        document.getElementById('opiniones-form').addEventListener('submit', function(e){
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value.trim();
+            const opinion = document.getElementById('opinion').value.trim();
+            if(!nombre || !opinion) return alert('Por favor completa los campos requeridos.');
+            openModal('feedback-modal');
+            this.reset();
+        });
+
+        document.getElementById('close-feedback-modal').addEventListener('click', function(){
+            closeModal('feedback-modal');
+        });
+
+        window.addEventListener('click', function(event) {
+            const feedbackModal = document.getElementById('feedback-modal');
+            if (event.target === feedbackModal) {
+                closeModal('feedback-modal');
+            }
+        });
+    </script>
+</body>
+</html>

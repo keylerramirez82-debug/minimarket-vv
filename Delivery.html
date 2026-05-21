@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery - Minimarket V&V</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="cart.js" defer></script>
+</head>
+<body>
+    <header class="banner">
+        <div class="header-content">
+            <a href="index.html" class="brand">
+                <img src="imagenes/logo.png" alt="Minimarket V&V logo">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Inicio</a>
+                <div class="dropdown">
+                    <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Productos ▾</button>
+                    <div class="dropdown-menu">
+                        <a href="productos_de_limpieza.html">Limpieza</a>
+                        <a href="snack.html">Snacks</a>
+                        <a href="frutas.html">Frutas</a>
+                        <a href="bebidas.html">Bebidas</a>
+                        <a href="alimentos.html">Alimentos</a>
+                        <a href="bebidas_alcoholicas.html">Bebidas Alcohólicas</a>
+                    </div>
+                </div>
+                <a href="opiniones.html">Opiniones</a>
+                <a href="Delivery.html" class="active">Delivery</a>
+            </nav>
+            <div class="header-actions">
+                <a href="login.html" class="btn account">Mi cuenta</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="bottom-section auth-card" style="max-width: 900px; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 100%; padding: 40px 20px;">
+                <h1 style="text-align: center; margin-bottom: 30px;">Tu Orden</h1>
+                <div id="delivery-cart-items" style="margin-bottom: 30px;"></div>
+                <div id="delivery-total" style="text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 30px;"></div>
+                <div style="text-align: center;">
+                    <button id="confirm-order-btn" class="btn primary" style="padding: 12px 40px; font-size: 16px;">Confirmar Orden</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        // Cargar y mostrar los productos del carrito en la página de Delivery
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+            const deliveryCartItems = document.getElementById('delivery-cart-items');
+            const deliveryTotal = document.getElementById('delivery-total');
+            const confirmOrderBtn = document.getElementById('confirm-order-btn');
+            
+            if (cartData.length === 0) {
+                deliveryCartItems.innerHTML = '<p style="text-align: center; font-size: 18px; color: #666;">Tu carrito está vacío</p>';
+                confirmOrderBtn.disabled = true;
+                deliveryTotal.style.display = 'none';
+                return;
+            }
+            
+            let total = 0;
+            let html = '<div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">';
+            
+            cartData.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                html += `
+                    <div style="display: flex; align-items: center; padding: 15px; border-bottom: ${index < cartData.length - 1 ? '1px solid #eee' : 'none'};">
+                        <img src="${item.image}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 5px; margin-right: 20px;">
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0 0 10px 0;">${item.name}</h4>
+                            <p style="margin: 0; color: #666;">Cantidad: ${item.quantity}</p>
+                            <p style="margin: 5px 0 0 0; color: #666;">Precio unitario: $${item.price.toFixed(2)}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="margin: 0; font-weight: bold; font-size: 18px;">$${subtotal.toFixed(2)}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            deliveryCartItems.innerHTML = html;
+            deliveryTotal.textContent = `Total: $${total.toFixed(2)}`;
+            
+            // Agregar evento al botón de confirmar orden
+            confirmOrderBtn.addEventListener('click', function() {
+                const direccion = prompt('Por favor, ingresa tu dirección de entrega:');
+                
+                if (direccion === null) {
+                    // Usuario canceló
+                    return;
+                }
+                
+                if (direccion.trim() === '') {
+                    alert('Por favor, ingresa una dirección válida.');
+                    return;
+                }
+                
+                alert('¡Orden confirmada!\nDirección de entrega: ' + direccion + '\nGracias por tu compra.');
+                localStorage.removeItem('cart');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
